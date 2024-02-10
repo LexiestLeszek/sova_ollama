@@ -2,7 +2,7 @@
 
 ## Description
 
-Sova is a web search engine that utilizes power of Large Language Models to return full text answer instead of bunch of links like traditional search engines do.
+Sova is a web search engine that utilizes power of Large Language Models (LLM) to return full text answer instead of bunch of links like traditional search engines do.
 
 ## Installation
 
