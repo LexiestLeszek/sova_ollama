@@ -58,7 +58,7 @@ def generate_output(question,context):
     Question: {question}\n
     Helpful Answer:"""
     
-    response = ollama.chat(model='tinydolphin', messages=[
+    response = ollama.chat(model='qwen:0.5b', messages=[
         
         {
             'role': 'system',
@@ -77,7 +77,6 @@ def generate_output(question,context):
 @app.route('/', methods=['GET', 'POST'])
 def index():
     query = ""
-    top_links = ""
     answer = ""
 
     if request.method == 'POST':
@@ -92,7 +91,7 @@ def index():
             
             print(answer)
 
-    return render_template('index.html', query=query, top_links=top_links, answer=answer)
+    return render_template('index.html', query=query, answer=answer)
 
 #if __name__ == '__main__':
 #    app.run(debug=True, port="8021")

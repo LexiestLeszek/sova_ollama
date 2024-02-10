@@ -158,28 +158,17 @@
         <div class="search-form">
             <form action="/" method="post">
                 <label for="query"></label><br>
-                <input type="text" id="query" name="query" placeholder=" Задайте свой вопрос ... "><br><br>
-                <input type="submit" value="Найти">
+                <input type="text" id="query" name="query" placeholder=" Ask here... "><br><br>
+                <input type="submit" value="Find">
             </form>
         </div>
 
         {% if query %}
         <div class="result-box">
             <div class="answer">
-                <h3>💡 Ответ: </h3>
+                <h3>💡 Answer: </h3>
                 <pre style="white-space: pre-wrap;">{{ answer }}</pre>
             </div>
-
-            {% if query and top_links %}
-            <div class="sources">
-                <h3>📚 Источники к "{{ query }}":</h3>
-                <ul>
-                    {% for link in top_links %}
-                        <li><a href="{{ link }}" target="_blank">{{ link }}</a></li>
-                    {% endfor %}
-                </ul>
-            </div>
-            {% endif %}
         </div>
         {% endif %}
     </div>
