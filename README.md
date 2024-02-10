@@ -10,9 +10,10 @@ Before installing Sova, ensure you have Python installed on your system. You wil
 
 To install Sova, follow these steps:
 
-1. Clone the repository: `git clone https://github.com/LexiestLeszek/sova_ollama.git`
-2. Install the required dependencies: `pip install -r requirements`
-3. Download the local LLM (in our case - qwen:1.8b) : `ollama run qwen:0.5b`
-4. Run the gunicorn server: `gunicorn -b 0.0.0.0:8080 app:app`
-5. Use the search-bar to input your search query or or question.
+1. Clone the repository using this command in terminal: `git clone https://github.com/LexiestLeszek/sova_ollama.git`
+2. Install the required dependencies using this command in terminal: `pip install -r requirements`
+3. Install Ollama from their website https://ollama.com/
+4. Download the local LLM (in our case - qwen:1.8b) using this command in terminal: `ollama run qwen:1.8b`
+5. Run the gunicorn server using this command in terminal: `gunicorn -b 0.0.0.0:8080 app:app`
+6. Use the search-bar to input your search query or or question.
 
