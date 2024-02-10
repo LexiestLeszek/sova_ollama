@@ -14,5 +14,5 @@ To install Sova, follow these steps:
 2. Install the required dependencies: `pip install -r requirements`
 3. Download the local LLM (in our case - qwen:0.5) : `ollama run qwen:0.5b`
 4. Run the gunicorn server: `gunicorn -b 0.0.0.0:8080 app:app`
-5. Use the search-bar to input your search querier or questions.
+5. Use the search-bar to input your search query or or question.
 
