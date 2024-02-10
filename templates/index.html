@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='favicon.png') }}">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sova Search</title>
+    <style>
+
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background-color: rgb(12,12,12);
+    }
+
+    h1 {
+        margin-bottom: 5px; /* Adjust this value as needed */
+    }
+
+    /* Style for the main container */
+    .container {
+        text-align: center;
+        color: white;
+        max-width: 90%;
+    }
+
+    /* Style for the form section */
+    .search-form {
+        margin-bottom: 10px;
+    }
+
+    input[type="text"] {
+        padding: 3px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        font-size: 20px;
+        background-color: #f5f5f5;
+        width: 600px; /* Adjust width as needed */
+        max-width: 90%;
+        height: 45px;
+        box-sizing: border-box; /* Ensure padding doesn't affect width */
+        margin-bottom: 5px;
+    }
+
+    /* Keyframes for the clicking animation */
+    @keyframes clickAnimation {
+        0% {
+            transform: scale(1);
+        }
+        50% {
+            transform: scale(0.9);
+        }
+        100% {
+            transform: scale(1);
+        }
+    }
+
+    input[type="submit"] {
+        margin-top: 5px;
+        padding: 10px 20px; /* Adjust padding for height and width */
+        background-color: #005eaa;
+        color:  #f5f5f5;
+        border: none;
+        border-radius: 5px;
+        width: 100px;
+        height: 40px;
+        font-size: 18px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: background-color 0.3s ease, transform 0.2s ease; /* Added transform property for animation */
+        margin-top: 10px; /* Adjust margin-top for positioning */
+    }
+
+    /* Add animation for the :active state of the submit button */
+    input[type="submit"]:active {
+        animation: clickAnimation 0.3s ease;
+    }
+
+    input[type="submit"]:hover {
+        background-color: rgb(55, 55, 55);
+    }
+
+    /* Style for the answer section */
+    .answer {
+        text-align: left;
+        margin-bottom: 20px;
+    }
+
+    /* Style for the sources section */
+    .sources {
+        list-style: none;
+        padding: 0;
+        text-align: left;
+        max-width: 100%;
+    }
+
+    .sources li {
+        margin-bottom: 5px;
+        padding-left: 0;
+        font-size: 12px;
+        text-overflow: ellipsis;
+        word-wrap: break-word; 
+    }
+
+    .sources a {
+        color: #42a5f5;
+        text-decoration: none;
+    }
+
+    .sources a:hover {
+        text-decoration: underline;
+    }
+
+    /* Style for the result box */
+    .result-box {
+        background-color: None;
+        padding: 20px;
+        width: 600px;
+        max-width: 90%;
+        border-radius: 8px;
+        margin-top: 20px;
+    }
+
+    /* Additional styles for the content inside the result box */
+    .result-box p {
+        color:  #f5f5f5;
+        font-size: 18px;
+        margin: 0;
+    }
+
+    .result-box h3 {
+        color:  #f5f5f5;
+        margin-top: 10px;
+    }
+
+    .result-box ul {
+        margin-top: 5px;
+    }
+
+    .result-box a {
+        color:  #f5f5f5;
+        text-decoration: none;
+    }
+
+    .result-box a:hover {
+        text-decoration: underline;
+    }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Sova 🦉</h1>
+        <div class="search-form">
+            <form action="/" method="post">
+                <label for="query"></label><br>
+                <input type="text" id="query" name="query" placeholder=" Задайте свой вопрос ... "><br><br>
+                <input type="submit" value="Найти">
+            </form>
+        </div>
+
+        {% if query %}
+        <div class="result-box">
+            <div class="answer">
+                <h3>💡 Ответ: </h3>
+                <pre style="white-space: pre-wrap;">{{ answer }}</pre>
+            </div>
+
+            {% if query and top_links %}
+            <div class="sources">
+                <h3>📚 Источники к "{{ query }}":</h3>
+                <ul>
+                    {% for link in top_links %}
+                        <li><a href="{{ link }}" target="_blank">{{ link }}</a></li>
+                    {% endfor %}
+                </ul>
+            </div>
+            {% endif %}
+        </div>
+        {% endif %}
+    </div>
+    <script>
+        document.getElementById('query').addEventListener('input', function(event) {
+//            const regex = /^[\u0400-\u04FF0-9\s!?*:\-+*/=,.]+$/g;
+//          restrincts a lot
+            const regex = /^[^\u003C\u003E;{}[\]]+$/g;
+//          everything except {}[\]]
+
+            let input = event.target.value;
+            let isValid = regex.test(input);
+        
+            while (!isValid && input.length > 0) {
+                input = input.slice(0, -1);
+                isValid = regex.test(input);
+            }
+        
+            event.target.value = input;
+        });
+
+        document.addEventListener('DOMContentLoaded', function() {
+            document.querySelector('.search-form').addEventListener('submit', function(event) {
+                // Disable the submit button
+                document.querySelector('input[type="submit"]').disabled = true;
+
+                // Enable the button after 15 seconds
+                setTimeout(function() {
+                    document.querySelector('input[type="submit"]').disabled = false;
+                }, 15000); // 15 seconds in milliseconds
+            });
+        });
+    </script>
+</body>
+</html>

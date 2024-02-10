@@ -1,0 +1,9 @@
+beautifulsoup4==4.11.1
+Flask==3.0.2
+google==3.0.0
+gunicorn==21.2.0
+langchain==0.1.6
+langchain_community==0.0.19
+ollama==0.1.6
+Requests==2.31.0
+translators==5.8.9
