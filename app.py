@@ -58,7 +58,7 @@ def generate_output(question,context):
     Question: {question}\n
     Helpful Answer:"""
     
-    response = ollama.chat(model='qwen:0.5b', messages=[
+    response = ollama.chat(model='qwen:1.8b', messages=[
         
         {
             'role': 'system',
